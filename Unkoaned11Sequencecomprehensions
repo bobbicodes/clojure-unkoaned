@@ -1,0 +1,34 @@
+Unkoaned 11. Sequence comprehensions
+
+Sequence comprehensions can bind each element in turn to a symbol
+
+user=> (for [index (range 6)] index)
+(0 1 2 3 4 5)
+
+They can easily emulate mapping
+
+user=> (map (fn [index] (* index index)) (range 6))
+         (for [index (range 6)] (* index index))
+(0 1 4 9 16 25)
+
+And also filtering
+
+user=> (filter odd? (range 10)) (for [index (range 10)
+           :when (odd? index)] index)
+(1 3 5 7 9)
+
+Combinations of these transformations is trivial
+
+user=> (map (fn [index] (* index index))
+         (filter odd? (range 10)))
+(1 9 25 49 81)
+user=> (for [index (range 10) :when (odd? index)] (* index index))
+(1 9 25 49 81)
+
+More complex transformations simply take multiple binding forms
+
+user=> (for [row [:top :middle :bottom] column
+            [:left :middle :right]] [row column])
+[[:top :left] [:top :middle] [:top :right]
+[:middle :left] [:middle :middle] [:middle :right]
+[:bottom :left] [:bottom :middle] [:bottom :right]]
