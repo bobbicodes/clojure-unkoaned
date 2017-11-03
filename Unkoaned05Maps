@@ -1,0 +1,76 @@
+Unkoaned 5. Maps
+
+Don't get lost when creating a map
+
+user=> (hash-map :a 1 :b 2)
+{:a 1, :b 2}
+
+A value must be supplied for each key
+
+user=> (hash-map :a 1)
+{:a 1}
+
+The size is the number of entries
+
+user=> (count {:a 1, :b 2})
+2
+
+You can look up the value for a given key
+
+user=> (get {:a 1, :b 2} :b)
+2
+
+Maps can be used as functions to do lookups
+
+user=> ({:a 1, :b 2} :a)
+1
+
+And so can keywords
+
+user=> (:a {:a 1, :b 2})
+1
+
+But map keys need not be keywords
+
+user=> ({2006 "Torino", 2010 "Vancouver", 2014 "Sochi"} 2010)
+"Vancouver"
+
+You may not be able to find an entry for a key
+
+user=> (get {:a 1, :b 2} :c)
+nil
+
+But you can provide your own default
+
+user=> (get {:a 1, :b 2} :c :key-not-found)
+:key-not-found
+
+You can find out if a key is present
+
+user=> (contains? {:a nil, :b nil} :b)
+true
+
+Or if it is missing
+
+user=> (contains? {:a nil, :b nil} :c)
+false
+
+Maps are immutable, but you can create a new and improved version
+
+user=> (assoc {1 "January"} 2 "February")
+{1 "January", 2 "February"}
+
+You can also create a new version with an entry removed
+
+user=> (dissoc {1 "January", 2 "February"} 2)
+{1 "January"}
+
+Often you will need to get the keys, but the order is undependable
+
+user=> (sort (keys {2010 "Vancouver", 2014 "Sochi", 2006 "Torino"}))
+(2006 2010 2014)
+
+You can get the values in a similar way
+
+user=> (sort (vals {2006 "Torino", 2010 "Vancouver", 2014 "Sochi"}))
+("Sochi" "Torino" "Vancouver")
