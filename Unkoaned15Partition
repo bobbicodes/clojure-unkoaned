@@ -1,0 +1,31 @@
+Unkoaned 15. Partition
+
+To split a collection you can use the partition function
+
+user=> (partition 2 (range 4))
+((0 1) (2 3))
+
+But watch out if there are not enough elements to form n sequences
+
+user=> (partition 3 [:a :b :c :d :e])
+((:a :b :c))
+
+You can use partition-all to also get partitions with less than n elements
+
+user=> (partition-all 3 (range 5))
+((0 1 2) (3 4))
+
+If you need to, you can start each sequence with an offset
+
+user=> (partition 3 5 (range 13))
+((0 1 2) (5 6 7) (10 11 12))
+
+Consider padding the last sequence with some default values..
+
+user=> (partition 3 3 [:hello] (range 7))
+((0 1 2) (3 4 5) (6 :hello))
+
+.. but notice that they will only pad up to given sequence length
+
+user=> (partition 3 3 [:this :are "my" "words"] (range 7))
+((0 1 2) (3 4 5) (6 :this :are))
