@@ -1,0 +1,40 @@
+Unkoaned 14. Atoms
+
+user=> (def atomic-clock (atom 0))
+#'user/atomic-clock
+
+Atoms are references to values
+
+user=> (deref atomic-clock)
+0
+
+You can get its value more succintly
+
+user=> @atomic-clock
+0
+
+You can even change at the swap meet
+
+user=> (do (swap! atomic-clock inc) @atomic-clock)
+1
+
+Keep taxes out of this: swapping requires no transaction
+
+user=> (do (last (take 5 (repeatedly
+         #(swap! atomic-clock inc)))) @atomic-clock)
+5
+
+Any number of arguments might happen during a swap
+
+user=> (do (swap! atomic-clock + 1 2 3 4 5) @atomic-clock)
+15
+
+Atomic atoms are atomic
+
+user=> (do (compare-and-set! atomic-clock 100 :fin) @atomic-clock)
+0
+
+When your expectations are aligned with reality things, proceed that way
+
+user=> (do (compare-and-set! atomic-clock 0 :fin) @atomic-clock)
+:fin
