@@ -1,0 +1,18 @@
+Unkoaned 4. Sets
+
+You can create a set by converting another collection
+
+user=> (set [3])
+#{3}
+user=> (set '(3))
+#{3}
+
+Counting them is like counting other collections
+
+user=> (count #{1 2 3})
+3
+
+Remember that a set is a *mathematical* set
+
+user=> (set '(1 1 2 2 3 3 4 4 5 5))
+#{1 2 3 4 5}
