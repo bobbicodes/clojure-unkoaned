@@ -1,0 +1,50 @@
+Unkoaned 9. Runtime Polymorphism
+
+Some functions can be used in different ways
+
+user=> (defn hello
+  ([] "Hello World!")
+  ([a] (str "Hello, you silly " a "."))
+  ([a & more] (str "Hello to this group: "
+                   (apply str
+                          (interpose ", " (concat (list a) more)))
+                   "!")))
+#'user/hello
+
+with no arguments
+
+user=> (hello)
+"Hello World!"
+
+With one argument
+
+user=> (hello "world")
+"Hello, you silly world."
+
+Or with many arguments
+
+user=> (hello "Peter" "Paul" "Mary")
+"Hello to this group: Peter, Paul, Mary!"
+
+Multimethods allow more complex dispatching
+
+user=> (defmulti diet (fn [x] (:eater x)))
+#'user/diet
+user=> (defmethod diet :herbivore [a] "Bambi eats veggies.")
+#<MultiFn clojure.lang.MultiFn@3254dfb>
+user=> (defmethod diet :carnivore [a] "Simba eats animals.")
+#<MultiFn clojure.lang.MultiFn@3254dfb>
+user=> (defmethod diet :default [a] "I don't know what Rich Hickey eats.")
+#object[clojure.lang.MultiFn 0x61ba4968 "clojure.lang.MultiFn@61ba4968"]
+
+Different methods are used depending on the dispatch function result
+
+user=> (diet {:species "deer", :name "Bambi", :age 1, :eater :herbivore})
+"Bambi eats veggies."
+user=> (diet {:species "lion", :name "Simba", :age 1, :eater :carnivore})
+"Simba eats animals."
+
+You may use a default method when no others match
+
+user=> (diet {:name "Rich Hickey"})
+"I don't know what Rich Hickey eats."
