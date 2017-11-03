@@ -1,0 +1,54 @@
+Unkoaned 7. Conditionals
+
+You will face many decisions
+
+user=> (if (false? (= 4 5)) :a :b)
+:a
+
+Some of them leave you no alternative
+
+user=> (if (> 4 3) [])
+[]
+
+And in such a situation you may have nothing
+
+user=> (if (nil? 0) [:a :b :c])
+nil
+
+In others your alternative may be interesting
+
+user=> (if (not (empty? ())) :doom :glory)
+:glory
+
+You may have a multitude of possible paths
+
+user=> (let [x 5] (cond (= x 1) :road-not-taken
+                        (= x 2) :another-road-not-taken 
+                        :else :your-road))
+:your-road
+
+Or your fate may be sealed
+
+user=> (if-not (zero? 0) 'doom 'doom)
+doom
+user=> (if-not (zero? 1) 'doom 'doom)
+doom
+
+In case of emergency, sound the alarms
+
+user=> (defn explain-defcon-level [exercise-term]
+  (case exercise-term
+    :fade-out :you-and-what-army
+    :double-take :call-me-when-its-important
+    :round-house :o-rly
+    :fast-pace :thats-pretty-bad
+    :cocked-pistol :sirens
+    :say-what?))
+#'user/explain-defcon-level
+user=> (explain-defcon-level :cocked-pistol)
+:sirens
+
+But admit it when you don't know what to do
+
+user=> (explain-defcon-level :yo-mama)
+:say-what?
