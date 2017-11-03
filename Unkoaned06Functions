@@ -1,0 +1,55 @@
+Unkoaned 6. Functions
+
+Calling a function is like giving it a hug with parentheses
+
+user=> (defn square [n] (* n n))
+#'user/square
+user=> (square 9)
+81
+
+Functions are usually defined before they are used
+
+user=> (defn multiply-by-ten [n] (* 10 n))
+#'user/multiply-by-ten
+user=> (multiply-by-ten 2)
+20
+
+But they can also be defined inline
+
+user=> ((fn [n] (* 5 n)) 2)
+10
+
+Or using an even shorter syntax
+
+user=> (#(* 15 %) 4)
+60
+
+Even anonymous functions may take multiple arguments
+
+user=> (#(+ %1 %2 %3) 4 5 6)
+15
+
+Arguments can also be skipped
+
+user=> (#(* 15 %2) 1 2)
+30
+
+One function can beget another
+
+user=> (((fn [] + )) 4 5)
+9
+
+Functions can also take other functions as input
+
+user=> ((fn [f] (f 4 5)) * )
+20
+
+Higher-order functions take function arguments
+
+user=> ((fn [f] (f 5)) (fn [n] (* n n)))
+25
+
+But they are often better written using the names of functions
+
+user=> ((fn [f] (f 5)) square)
+25
