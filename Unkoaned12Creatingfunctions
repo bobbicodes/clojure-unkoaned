@@ -1,0 +1,41 @@
+Unkoaned 12. Creating functions
+
+user=> (defn square [x] (* x x))
+#'user/square
+
+One may know what they seek by knowing what they do not seek
+
+user=> (let [not-a-symbol? (complement symbol?)]
+         (map not-a-symbol? [:a 'b "c"]))
+[true false true] 
+
+Praise and 'complement' may help you separate the wheat from the chaff
+
+user=> (let [not-nil? (complement nil?)]
+         (filter not-nil? [nil :wheat nil "wheat" nil 'wheat nil]))
+[:wheat "wheat" 'wheat]
+
+Partial functions allow procrastination
+
+user=> (let [multiply-by-5 (partial * 5)] (multiply-by-5 4))
+20
+
+Don't forget: first things first
+
+user=> (let [ab-adder (partial concat [:a :b])] (ab-adder ["eat" "me"]))
+[:a :b "eat" "me"]
+
+Functions can join forces as one 'composed' function
+ 
+user=> (let [inc-and-square (comp square inc)] (inc-and-square 4 ))
+25
+
+Have a go on a double dec-er
+
+user=> (let [double-dec (comp dec dec)] (double-dec 10))
+8
+
+Be careful about the order in which you mix your functions
+
+user=> (let [square-and-dec (comp dec square)] (square-and-dec 10))
+99
