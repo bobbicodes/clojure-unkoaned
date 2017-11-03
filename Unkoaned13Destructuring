@@ -1,0 +1,58 @@
+Unkoaned 13. Destructuring 
+
+user=> (def test-address
+  {:street-address "123 Test Lane"
+   :city "Testerville"
+   :state "TX"})
+#'user/test-address
+
+Destructuring is an arbiter: it breaks up arguments
+
+user=> ((fn a b (str b a)) [:foo :bar])
+":bar:foo"
+
+Whether in function definitions
+
+user=> (str "First comes love, " "then comes marriage, " "then comes Clojure with the baby carriage")
+"First comes love, then comes marriage,then comes Clojure with the baby carriage"
+
+user=> ((fn [[a b c]] (str "First comes " a ", "
+"then comes " b ", " "then comes " c " with the baby carriage"))
+        ["love" "marriage" "Clojure"])
+"First comes love, then comes marriage, then comes Clojure with the baby carriage"
+
+Or in let expressions
+
+user=> (let [[first-name last-name & aliases] (list "Rich" "Hickey" "The Clojurer" 
+"Go Time" "Macro Killah")]
+     (str first-name " " last-name " aka " (apply str (interpose " aka " 
+aliases)))) ;=> "Rich Hickey aka The Clojurer aka Go Time aka Macro Killah"
+
+You can regain the full argument if you like arguing
+
+user=> (let [[first-name last-name :as full-name]
+            ["Steven" "Hawking"]]
+     {:original-parts full-name
+      :named-parts {:first first-name :last last-name}})
+{:original-parts ["Steven" "Hawking"], :named-parts {:first "Steven", :last "Hawking"}}
+
+Break up maps by key
+
+user=> (let [{street-address :street-address, city :city,
+              state :state} test-address]
+         (str street-address ", " city ", " state))
+"123 Test Lane, Testerville, TX"
+
+Or more succinctly
+
+user=> (let [{:keys [street-address city state]} test-address]
+         (str street-address ", " city ", " state))
+"123 Test Lane, Testerville, TX"
+
+All together now!
+
+user=> (#(str (apply str (interpose " " %)) ", "
+          (let [{:keys [street-address city state]} %2]
+            (str street-address ", " city ", " state)))
+        ["Test" "Testerson"] test-address)
+"Test Testerson, 123 Test Lane, Testerville, TX"
