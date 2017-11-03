@@ -1,0 +1,46 @@
+UnKoaned 1. Equality
+
+We shall contemplate truth by testing reality, via equality
+
+user=> (= true true)
+true
+
+To understand reality, we must compare our expectations against reality
+
+user=> (+ 1 1)
+2
+
+You can test equality of many things
+
+user=> (= (+ 3 4) 7 (+ 2 5))
+true
+
+But you may not string yourself along
+
+user=> (= 2 "2")
+false
+
+Something is not equal to nothing
+
+user=> (= true (not (= 1 nil)))
+true
+
+Strings, and keywords, and symbols: oh my!
+
+user=> (= "foo" :foo 'foo)
+false
+
+Make a keyword with your keyboard
+
+user=> (= :foo (keyword "foo"))
+true
+
+Symbolism is all around us
+
+user=> (= 'foo (symbol "foo"))
+true
+
+When things cannot be equal, they must be different
+
+user=> (not= :fill-in 1)
+true
