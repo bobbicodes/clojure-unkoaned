@@ -1,2 +1,2 @@
 # clojure-unkoaned
-An astonishingly simple path to learn programming fundamendals
+An astonishingly simple path to learn programming fundamentals
