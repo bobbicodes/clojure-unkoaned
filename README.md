@@ -12,4 +12,4 @@ The task of the student/teacher is then to describe the path from a to b.
 
 So I took the completed problems/solutions and rearranged them as they would occur in a REPL, as a series of input/output relationships.
 
-It serves as an ideal cheatsheet or guide for teaching Clojure.
+An ideal study guide!
