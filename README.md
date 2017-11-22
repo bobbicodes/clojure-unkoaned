@@ -1,5 +1,4 @@
 # clojure-unkoaned
-An astonishingly simple path to learn programming fundamentals.
 
 I'm a huge fan of the Clojure Koans' incremental approach to learning the language, but not so much of the style of presentation. It shows you each problem in the form of an expression that you have to complete so that it will evaluate to true.
 
